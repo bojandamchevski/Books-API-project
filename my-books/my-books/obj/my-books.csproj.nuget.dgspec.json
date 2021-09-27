@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Com\\Desktop\\Course API\\my-books\\my-books\\my-books.csproj": {}
+    "C:\\Users\\Com\\Desktop\\Projects\\Books-API-project\\my-books\\my-books\\my-books.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Com\\Desktop\\Course API\\my-books\\my-books\\my-books.csproj": {
+    "C:\\Users\\Com\\Desktop\\Projects\\Books-API-project\\my-books\\my-books\\my-books.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Com\\Desktop\\Course API\\my-books\\my-books\\my-books.csproj",
+        "projectUniqueName": "C:\\Users\\Com\\Desktop\\Projects\\Books-API-project\\my-books\\my-books\\my-books.csproj",
         "projectName": "my-books",
-        "projectPath": "C:\\Users\\Com\\Desktop\\Course API\\my-books\\my-books\\my-books.csproj",
+        "projectPath": "C:\\Users\\Com\\Desktop\\Projects\\Books-API-project\\my-books\\my-books\\my-books.csproj",
         "packagesPath": "C:\\Users\\Com\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Com\\Desktop\\Course API\\my-books\\my-books\\obj\\",
+        "outputPath": "C:\\Users\\Com\\Desktop\\Projects\\Books-API-project\\my-books\\my-books\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Com\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.11, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.1, )"
