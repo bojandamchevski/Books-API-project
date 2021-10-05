@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using my_books.ActionResults;
+using my_books.Data.Models;
 using my_books.Data.Services;
 using my_books.Data.ViewModels;
 using my_books.Exceptions;
@@ -19,6 +21,20 @@ namespace my_books.Controllers
         public PublishersController(PublishersService publisherService)
         {
             _publisherService = publisherService;
+        }
+
+        [HttpGet("get-all-publishers")]
+        public IActionResult GetAllPublishers(string sortBy, string searchString, int pageNumber)
+        {
+            try
+            {
+                var _result = _publisherService.GetAllPublishers(sortBy, searchString, pageNumber);
+                return Ok(_result);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Sorry, we could not load the publishers");
+            }
         }
 
         [HttpPost("add-publisher")]
@@ -63,15 +79,46 @@ namespace my_books.Controllers
         [HttpGet("get-publisher-by-id/{id}")]
         public IActionResult GetPublisherById(int id)
         {
-            throw new Exception("This is an exception that will be handled by middleware");
-
-            var response = _publisherService.GetPublisherById(id);
-            if (response != null)
+            var _response = _publisherService.GetPublisherById(id);
+            if (_response != null)
             {
-                return Ok(response);
+                return Ok(_response);
+            }
+            else
+            {
+                //return null;
+                return NotFound();
             }
 
-            return NotFound();
         }
+
+        //[HttpGet("get-publisher-by-id/{id}")]
+        //public CustomActionResult GetPublisherById(int id)
+        //{
+        //    var _response = _publisherService.GetPublisherById(id);
+        //    if (_response != null)
+        //    {
+        //        //return Ok(_response);
+        //        var _responseObj = new CustomActionResultVM()
+        //        {
+        //            Publisher = _response
+        //        };
+
+        //        return new CustomActionResult(_responseObj);
+        //        //return _response;
+        //    }
+        //    else
+        //    {
+        //        //return null;
+        //        //return NotFound();
+        //        var _responseObj = new CustomActionResultVM()
+        //        {
+        //            Exception = new Exception("This is coming from the publisher controller")
+        //        };
+
+        //        return new CustomActionResult(_responseObj);
+        //    }
+
+        //}
     }
 }

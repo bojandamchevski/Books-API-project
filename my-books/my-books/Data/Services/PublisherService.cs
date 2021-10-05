@@ -57,10 +57,40 @@ namespace my_books.Data.Services
                 _appDbContext.Publishers.Remove(_publisher);
                 _appDbContext.SaveChanges();
             }
+            else
+            {
+                throw new Exception($"The publisher with id {_publisher.Id} does not exist");
+            }
         }
 
         public Publisher GetPublisherById(int id) => _appDbContext.Publishers.FirstOrDefault(x => x.Id == id);
 
         private bool StringStartsWithNumber(string name) => Regex.IsMatch(name, @"^\d");
+
+        public List<Publisher> GetAllPublishers(string sortBy, string searchString,int pageNumber)
+        {
+            var allPublishers = _appDbContext.Publishers.OrderBy(n => n.Name).ToList();
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                switch (sortBy)
+                {
+                    case "name_desc":
+                        allPublishers = allPublishers.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                allPublishers = allPublishers.Where(x => x.Name.Contains(searchString, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            }
+
+
+
+            return allPublishers;
+        }
     }
 }
